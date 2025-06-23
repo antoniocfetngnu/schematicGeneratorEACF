@@ -1,99 +1,175 @@
+# 🧠 Software De Generación De Esquemáticos Eléctricos A Partir De Imágenes De Circuitos Montados En Protoboard
 
-
-## Autor
-**Nombre**: Calderón Flores Enrique Antonio  
-**Carrera**: Ingeniería en Ciencias de la Computación  
-**Materia**: SIS330 - Sistemas Inteligentes  
-**Universidad**: Universidad Mayor, Real y Pontificia de San Francisco Xavier de Chuquisaca
+![Status](https://img.shields.io/badge/status-completado-brightgreen)
+![Hecho con](https://img.shields.io/badge/Hecho%20con-Kotlin%20%7C%20Python%20%7C%20YOLOv8-ff69b4)
+![Plataforma](https://img.shields.io/badge/plataforma-Android%20%7C%20Ubuntu-brightgreen)
 
 ---
 
-# Software De Generación De Esquemáticos Eléctricos A Partir De Imágenes De Circuitos Montados En Protoboard
+## 📑 Contenidos
 
-## Propósito y Beneficios
+- [👤 Autor](#-autor)
+- [🎯 Propósito y Beneficios](#-propósito-y-beneficios)
+- [⚙️ Cómo Funciona](#-cómo-funciona)
+- [🧠 Modelos de Procesamiento](#-modelos-de-procesamiento)
+- [🛠️ Tecnologías](#-tecnologías)
+- [🚀 Cómo Instalar](#-cómo-instalar)
+- [📄 Artículo Científico](#-referencia-al-artículo-científico)
+- [🎥 Video Tutorial](#-también-puedes-ver-el-video-tutorialdemostración-de-uso)
+- [🤝 Agradecimientos](#-agradecimientos)
+- [📫 Contacto](#-contacto)
 
-Este proyecto ofrece un sistema inteligente para generar esquemas eléctricos de circuitos armados completamente en una sola protoboard, utilizando visión por computadora y aprendizaje profundo. Dirigido a estudiantes y entusiastas de la electrónica, analiza imágenes de protoboards reales para identificar componentes y conexiones, produciendo un esquema eléctrico visual que permite a los usuarios verificar manualmente el montaje. Es ideal para cursos introductorios, prácticas de laboratorio y proyectos educativos sin soldadura.
+---
 
-**Beneficios**:
+## 👤 Autor
 
-- **Generación de Esquemas**: Crea esquemas eléctricos precisos para facilitar la verificación manual.
-- **Ahorro de Tiempo y Costos**: Reduce errores de montaje, evitando daños a componentes y protoboards.
-- **Apoyo Educativo**: Ofrece retroalimentación visual para principiantes, mejorando el aprendizaje práctico y la confianza.
+- **Nombre**: *Calderón Flores Enrique Antonio*
+- **Carrera**: Ingeniería en Ciencias de la Computación  
+- **Materia**: SIS330 - DESARROLLO DE APLICACIONES INTELIGENTES 	  
+- **Universidad**: Universidad Mayor, Real y Pontificia de San Francisco Xavier de Chuquisaca
 
-## Cómo Funciona
-![Captura de ejemplo del esquema eléctrico generado](./resources/ComponentesSoftware.jpg)
+---
 
-El sistema combina una aplicación móvil (cliente) y un servidor en una PC para procesar imágenes de protoboards y generar esquemas eléctricos. La aplicación captura imágenes, permite seleccionar tipos de circuitos integrados (DIPs) si se detectan, y muestra el esquema resultante. El servidor ejecuta modelos de inteligencia artificial para analizar la imagen y devolver los resultados.
+## 🎯 Propósito y Beneficios
 
-### Modelos de Procesamiento
+Este proyecto ofrece un sistema inteligente para generar esquemas eléctricos de circuitos armados completamente en una sola protoboard, utilizando visión por computadora y aprendizaje profundo. Está dirigido a estudiantes y entusiastas de la electrónica.
 
-El procesamiento se basa en un pipeline modular que utiliza la arquitectura YOLOv8 para detección de objetos y segmentación por instancias, dividido en ocho etapas:
+### ✨ Beneficios
 
-1. **Detección de Componentes**: Identifica componentes electrónicos en el protoboard mediante cajas delimitadoras para un análisis detallado.
-2. **Segmentación de Patillas Finas**: Detecta las patillas de componentes pequeños (por ejemplo, resistencias, LEDs) para mapear conexiones con precisión.
-3. **Segmentación de Cables**: Segmenta cables individuales, trazando sus trayectorias incluso si se superponen, para reconstruir el esquema de conexiones.
-4. **Detección de Extremos de Cables**: Localiza los extremos de los cables con cajas delimitadoras para vincularlos correctamente con otros componentes.
-5. **Segmentación de Pines (DIPs/Sensores)**: Detecta pines de componentes complejos como circuitos integrados con alta precisión, considerando su orientación.
-6. **Detección de Zonas Clave**: Identifica los carriles de alimentación y la división central del protoboard para delimitar el área de trabajo.
-7. **Detección de Carriles**: Detecta carriles verticales del protoboard con cajas delimitadoras, conectando componentes dentro del mismo carril.
-8. **Correcciones Espaciales y Geométricas**: Refina las detecciones usando análisis espacial, interpolando pines faltantes en circuitos integrados, corrigiendo distorsiones de perspectiva (por ejemplo, en botones) y verificando conexiones mediante superposición geométrica. Esto asegura una reconstrucción robusta del esquema eléctrico, incluso con interrupciones visuales.
+- ✅ **Generación de Esquemas**: Facilita la verificación manual.
+- ✅ **Ahorro de Tiempo y Costos**: Reduce errores de montaje.
+- ✅ **Apoyo Educativo**: Brinda retroalimentación visual a principiantes.
 
-### Tecnologías
+---
 
-- **Aplicación Móvil (Cliente)**:
-  - **Entorno**: Desarrollada en Android Studio con Kotlin 1.9.24.
-  - **Interfaz**: Vistas XML para captura de imágenes, visualización de resultados y selección de tipos de DIPs (por ejemplo, 7408) cuando se detectan, ya que las inscripciones en los DIPs pueden ser poco claras o estar obstruidas por cables.
-  - **Captura y Preprocesamiento**: Usa OpenCV 4.10 para capturar y redimensionar imágenes, codificándolas en Base64.
-  - **Comunicación**: Emplea Retrofit para enviar solicitudes HTTP POST al servidor y recibir respuestas en JSON e imágenes procesadas.
-  - **Visualización**: Renderiza el esquema eléctrico con Canvas, mostrando componentes, conexiones y carriles con colores distintivos.
-- **Servidor (Backend)**:
-  - **Entorno**: Implementado en Python con Flask, desplegado en Ubuntu.
-  - **Procesamiento**: Ejecuta el pipeline de modelos YOLOv8 y análisis espacial para generar un JSON con datos del circuito y una imagen anotada (3000x3000).
-  - **Rutas HTTP**: Recibe imágenes Base64 vía POST y devuelve resultados procesados.
+## ⚙️ Cómo Funciona
 
-El sistema genera una imagen de alta resolución (3000x3000) en la aplicación móvil, mostrando componentes, conexiones y zonas clave, permitiendo a los usuarios verificar el circuito contra el esquema eléctrico generado.
+<p align="center">
+  <img src="./resources/ComponentesSoftware.jpg" width="600" alt="Diagrama de Componentes">
+</p>
+<p align="center"><i>Diagrama de Componentes del Software</i></p>
 
-## Cómo Instalar
+El sistema combina una aplicación móvil (cliente) y un servidor en una PC para procesar imágenes de protoboards y generar esquemas eléctricos. La app captura imágenes, permite seleccionar tipos de circuitos integrados (DIPs) y muestra el esquema resultante. El servidor ejecuta modelos de IA para procesar la imagen y devolver los resultados.
 
-### Requisitos
+---
 
-- **Aplicación Móvil**:
-  - Dispositivo Android (versión 8.0 o superior).
-  - Android Studio con Kotlin 1.9.24.
-  - Dependencias principales: OpenCV 4.10, Retrofit.
+## 🧠 Modelos de Procesamiento
+
+El sistema usa una arquitectura modular con YOLOv8, dividida en 8 etapas, la última etapa son algoritmos (sin IA) que utilizan como entrada las salidas de los anteriores modelos:
+
+1. 🔍 **Detección de Componentes**
+2. 🧷 **Segmentación de Patillas Finas**
+3. 🔌 **Segmentación de Cables**
+4. 🎯 **Segmentacion de Extremos de Cables**
+5. 🧠 **Deteccion de Pines (DIPs/Sensores)**
+6. 📍 **Detección de Zonas Clave del Protoboard**
+7. 🧭 **Detección de Carriles Verticales del protoboard**
+8. 🛠️ **Correcciones Espaciales y Geométricas**
+
+---
+
+## 🛠️ Tecnologías
+
+### 📱 Aplicación Móvil
+
+- **Lenguaje**: Kotlin 1.9.24
+- **Frameworks**: Android Studio, OpenCV 4.10, Retrofit
+- **Funciones**: Captura de imágenes, preprocesamiento, comunicación con el servidor, renderizado visual con Canvas
+
+### 🖥️ Servidor
+
+- **Lenguaje**: Python 3.8+
+- **Frameworks**: Flask, YOLOv8 (Ultralytics), OpenCV
+- **Sistema operativo**: Ubuntu (recomendado)
+- **Salidas**: JSON con datos del circuito + imagen anotada (3000x3000)
+
+---
+
+## 🚀 Cómo Instalar
+
+### 📦 Requisitos
+
+- **Móvil**:
+  - Android 8.0+
+  - Android Studio
+  - Dependencias: OpenCV 4.10, Retrofit
+
 - **Servidor**:
-  - PC con Ubuntu (o compatible con Python 3.8+).
-  - Dependencias principales: Flask, YOLOv8.
+  - Ubuntu/Linux con Python 3.8+
+  - Flask, Ultralytics YOLOv8
 
-### Instrucciones
+### 🧪 Instrucciones
 
-El repositorio cuenta con ambas partes del proyecto, el codigo fuente de la aplicación móvil y el código fuente del servidor.
-Por tanto, al clonar el repositorio se tiene a disposición ambas partes.
+> 📂 El servidor se encuentra en `circuitsDetectionServerEACF`  
+> 📂 La app móvil está en `schemaitics`
 
-1. **Configurar el Servidor**:
-   - EL servidor se encuentra en la carpeta "circuitsDetectionServerEACF" del repositorio 
-   - Instala dependencias: `pip install -r requirements.txt`.
-   - Inicia el servidor Flask: `python app.py`. 
-   - Asegúrate de que el servidor esté accesible en la red local (por ejemplo, `http://<IP_LOCAL>:5000`).
-2. **Configurar la Aplicación Móvil**:
-   - El código de la aplicación movil se encuentra en la carpeta "schemaitics" del repositorio.
-   - Abre el proyecto en Android Studio.
-   - Para configurar la conexión con el servidor, edite el archivo Constants.kt para especificar la dirección IP del servidor al que apunta la aplicación. Asegúrese de que esta IP coincida con la configurada en el archivo network_security_config.xml, ubicado en app/src/main/res/xml/, donde se definen los permisos de red de Android para permitir la comunicación con el servidor. Actualice ambos archivos con la misma IP para garantizar una conexión segura y correcta.
-   - Instala las dependencias (Retrofit) mediante Gradle.
-   - Para integrar OpenCV en el proyecto, descargue la biblioteca desde su repositorio oficial para Android Studio. Importe el módulo de OpenCV al proyecto y asegúrese de que las versiones especificadas en los archivos build.gradle (nivel de proyecto y nivel de módulo) sean idénticas para evitar errores de compilación. Sincronice el proyecto tras realizar los cambios.
-   - Compila e instala la aplicación en un dispositivo Android.
-3. **Uso**:
-   - Abra la aplicación móvil y capture una imagen de un protoboard con un circuito completo.
-   - La imagen se envía al servidor, que procesa la solicitud y devuelve una respuesta a la aplicación.
-   - Si se detectan circuitos integrados (DIPs), seleccione el tipo correspondiente (por ejemplo, 7408) en los desplegables generados por la aplicación. En caso de múltiples DIPs, cada uno se identifica con un color distintivo para asociarlo correctamente con su desplegable.
-   - La selección se envía al servidor, que genera un archivo JSON con la información del circuito y lo devuelve a la aplicación móvil.
-   - La aplicación utiliza el JSON recibido para renderizar el esquema eléctrico en Canvas, mostrando componentes, conexiones y carriles.
-   - Visualice el esquema eléctrico generado en la aplicación para verificar el montaje del circuito.
+## 📦 Descarga de Modelos
 
-**Nota**: Asegúrate de que el dispositivo móvil y el servidor estén en la misma red para la comunicación.
+Los modelos se encuentran disponibles aquí:  
+🔗 [Descargar desde Google Drive](https://drive.google.com/drive/folders/1_lzV4dt3Pup1IUGmzTJVtqW_tBoS7uIz?usp=sharing)
 
-## Referencia al artículo científico en base al proyecto desarrollado y explicado en el repo
-Este proyecto está basado en el artículo científico titulado "Software De Generación De Esquemáticos Eléctricos A Partir De Imágenes De Circuitos Montados En Protoboard", disponible en el archivo [CalderonArticuloCientificoJun232025.pdf](CalderonArticuloCientificoJun232025.pdf), que detalla el desarrollo, metodología y resultados del sistema.
+#### 1. Configurar el Servidor
 
-## También puedes ver el video tutorial de uso y referencia al video
-Consulta el video tutorial de uso del sistema en el archivo [DemostracionTutorialUso.mp4](DemostracionTutorialUso.mp4) para una guía práctica sobre su instalación y funcionamiento.
+```bash
+cd circuitsDetectionServerEACF
+
+# Crear carpeta para modelos si no existe
+mkdir -p modelos
+
+# Instalar dependencias
+pip install -r requirements.txt
+
+# Iniciar el servidor
+python app.py
+```
+
+> 📁 **Nota**: coloca todos los modelos descargados (YOLOv8 `.pt`, etc.) en la carpeta `modelos/`.
+> Asegúrate de haberlos obtenido desde el enlace proporcionado en la sección anterior (por ejemplo, Google Drive o Hugging Face).
+
+> 🌐 Verifica que el servidor esté disponible en la red local: `http://<IP_LOCAL>:5000`
+
+#### 2. Configurar la App Móvil
+
+* Abre el proyecto `schemaitics` en Android Studio.
+* Edita `Constants.kt` y `network_security_config.xml` para definir la IP del servidor.
+* Integra OpenCV: importa el módulo oficial y sincroniza las versiones en `build.gradle`.
+* Compila e instala la app en un dispositivo Android.
+
+#### 3. Uso
+
+1. Abre la app y captura una imagen del circuito.
+2. El servidor procesa la imagen.
+3. Si hay DIPs, selecciona el tipo (ej. 7408) en el menú desplegable.
+4. El servidor envía un JSON con el esquema.
+5. La app renderiza el esquema sobre la imagen original usando Canvas.
+
+> 📶 Asegúrate de que el celular y el servidor estén en la **misma red local**.
+
+---
+
+## 📄 Referencia al Artículo Científico
+
+Consulta el artículo detallado del proyecto:
+
+📘 [CalderonArticuloCientificoJun232025.pdf](CalderonArticuloCientificoJun232025.pdf)
+
+---
+
+## 🎥 Video Tutorial
+
+Demostración del sistema en acción:
+
+📺 [DemostracionTutorialUso.mp4](DemostracionTutorialUso.mp4)
+
+---
+
+## 🤝 Agradecimientos
+
+Al docente de **DESARROLLO DE APLICACIONES INTELIGENTES** por fomentar el desarrollo de soluciones aplicadas con impacto educativo y técnico.
+
+---
+
+## 📫 Contacto
+
+¿Dudas o sugerencias?
+✉️ [antoniocfbb17@gmail.com](mailto:antoniocfbb17@gmail.com) 
