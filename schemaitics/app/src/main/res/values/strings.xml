@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">SchemAItics</string>
+    <string name="title_activity_schematic_viewer">SchematicViewerActivity</string>
+</resources>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:padding="16dp">
+
+    <!-- Imagen a la izquierda -->
+    <ImageView
+        android:id="@+id/image_dips"
+        android:layout_width="400dp"
+        android:layout_height="match_parent"
+        android:scaleType="fitCenter"
+        android:contentDescription="Imagen con máscaras de DIPs"
+        android:layout_marginEnd="16dp" />
+
+    <!-- Controles a la derecha -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:id="@+id/dip_selection_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="8dp" />
+
+        </ScrollView>
+
+        <Button
+            android:id="@+id/button_send_selections"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Enviar Selecciones"
+            android:enabled="false"
+            android:layout_marginTop="8dp" />
+
+    </LinearLayout>
+
+</LinearLayout>
