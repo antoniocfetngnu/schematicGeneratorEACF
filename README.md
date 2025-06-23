@@ -28,6 +28,11 @@
 - **Materia**: SIS330 - DESARROLLO DE APLICACIONES INTELIGENTES 	  
 - **Universidad**: Universidad Mayor, Real y Pontificia de San Francisco Xavier de Chuquisaca
 
+#### 📫 Contacto
+
+¿Dudas o sugerencias?
+✉️ [antoniocfbb17@gmail.com](mailto:antoniocfbb17@gmail.com) 
+
 ---
 
 ## 🎯 Propósito y Beneficios
@@ -168,8 +173,3 @@ Demostración del sistema en acción:
 Al docente de **DESARROLLO DE APLICACIONES INTELIGENTES** por fomentar el desarrollo de soluciones aplicadas con impacto educativo y técnico.
 
 ---
-
-## 📫 Contacto
-
-¿Dudas o sugerencias?
-✉️ [antoniocfbb17@gmail.com](mailto:antoniocfbb17@gmail.com) 
