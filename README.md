@@ -91,3 +91,9 @@ Por tanto, al clonar el repositorio se tiene a disposición ambas partes.
    - Visualice el esquema eléctrico generado en la aplicación para verificar el montaje del circuito.
 
 **Nota**: Asegúrate de que el dispositivo móvil y el servidor estén en la misma red para la comunicación.
+
+## Referencia al artículo científico en base al proyecto desarrollado y explicado en el repo
+Este proyecto está basado en el artículo científico titulado "Software De Generación De Esquemáticos Eléctricos A Partir De Imágenes De Circuitos Montados En Protoboard", disponible en el archivo [CalderonArticuloCientificoJun232025.pdf](CalderonArticuloCientificoJun232025.pdf), que detalla el desarrollo, metodología y resultados del sistema.
+
+## También puedes ver el video tutorial de uso y referencia al video
+Consulta el video tutorial de uso del sistema en el archivo [DemostracionTutorialUso.mp4](DemostracionTutorialUso.mp4) para una guía práctica sobre su instalación y funcionamiento.
