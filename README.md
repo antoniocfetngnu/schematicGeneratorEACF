@@ -9,6 +9,7 @@
 ## 📑 Contenidos
 
 - [👤 Autor](#-autor)
+- [📫 Contacto](#-contacto)
 - [🎯 Propósito y Beneficios](#-propósito-y-beneficios)
 - [⚙️ Cómo Funciona](#-cómo-funciona)
 - [🧠 Modelos de Procesamiento](#-modelos-de-procesamiento)
@@ -17,7 +18,7 @@
 - [📄 Artículo Científico](#-referencia-al-artículo-científico)
 - [🎥 Video Tutorial](#-también-puedes-ver-el-video-tutorialdemostración-de-uso)
 - [🤝 Agradecimientos](#-agradecimientos)
-- [📫 Contacto](#-contacto)
+
 
 ---
 
